@@ -43,6 +43,9 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+        if(group == Group.GOOD){
+            moving = false;
+        }
     }
 
     private final int SPEED = 5;
@@ -124,25 +127,38 @@ public class Tank {
         if (!moving) {
             return;
         }
-        //坦克边界
-        if(x >= tankFrame.GAME_WIDTH-WIDTH || y >= tankFrame.GAME_HEIGHT-HEIGHT || x <= 0 || x <= 0){
-            moving = false;
-        }
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            default:
-                break;
+        //坦克边界 停止 需要改为返回继续随机
+        if(x >= tankFrame.GAME_WIDTH-WIDTH || y >= tankFrame.GAME_HEIGHT-HEIGHT || x <= 0 || y <= 0){
+            return;
+        }else {
+            switch (dir) {
+                case LEFT:
+                    x -= SPEED;
+                    if(x <= 0){
+                        x += SPEED;
+                    }
+                    break;
+                case RIGHT:
+                    x += SPEED;
+                    if(x >= tankFrame.GAME_WIDTH-WIDTH){
+                        x -= SPEED;
+                    }
+                    break;
+                case UP:
+                    y -= SPEED;
+                    if(y <= 0){
+                        y += SPEED;
+                    }
+                    break;
+                case DOWN:
+                    y += SPEED;
+                    if(y >= tankFrame.GAME_HEIGHT-HEIGHT){
+                        y -= SPEED;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
         //坦克边界
         if(random.nextInt(10 ) > 8 && group != Group.GOOD) {
@@ -160,7 +176,8 @@ public class Tank {
      * @return
      */
     private void randomDir() {
-
+        int i = random.nextInt(Dir.values().length);
+        dir = Dir.values()[i];
     }
 
     public void fire() {
