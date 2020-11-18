@@ -24,11 +24,17 @@ public class Tank {
 
     private boolean living = true;
 
-    //区分敌我
+    /**
+     * 区分敌我
+     */
     private Group group = Group.BED;
 
-    //随机方向
+    /**
+     * 随机方向
+     */
     private Random random = new Random();
+
+    private Exploades exploades;
 
     public Tank(int x, int y, Dir dir,Group group, TankFrame tankFrame) {
         super();
@@ -84,8 +90,12 @@ public class Tank {
     public void paint(Graphics g) {
         if(!living){
             tankFrame.tanks.remove(this);
+            exploades.paint(g);
         }
         //填充矩形
+//        if(){
+//
+//        }
 //        Color c = g.getColor();
 //        g.setColor(Color.BLUE);
 //        g.fillRect(x, y, TANK_WIDTH, TANK_HEIGHT);
@@ -114,6 +124,10 @@ public class Tank {
         if (!moving) {
             return;
         }
+        //坦克边界
+        if(x >= tankFrame.GAME_WIDTH-WIDTH || y >= tankFrame.GAME_HEIGHT-HEIGHT || x <= 0 || x <= 0){
+            moving = false;
+        }
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -130,9 +144,23 @@ public class Tank {
             default:
                 break;
         }
-        if(random.nextInt(10) > 8) {
+        //坦克边界
+        if(random.nextInt(10 ) > 8 && group != Group.GOOD) {
             this.fire();
+            this.randomDir();
         }
+    }
+
+    /**
+     * @author wwp
+     * @description 随机移动
+     * @Params
+     * @updateTime 2020/11/18 19:46
+     * @throws
+     * @return
+     */
+    private void randomDir() {
+
     }
 
     public void fire() {
@@ -143,5 +171,6 @@ public class Tank {
 
     public void die() {
         this.living = false;
+        exploades = new Exploades(this.x,this.y,tankFrame);
     }
 }

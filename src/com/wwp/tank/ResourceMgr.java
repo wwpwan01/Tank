@@ -1,8 +1,10 @@
 package com.wwp.tank;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author wwp
@@ -15,6 +17,7 @@ import java.io.IOException;
 public class ResourceMgr {
     static BufferedImage tankL,tankU,tankD,tankR;
     static BufferedImage bulletL,bulletU,bulletD,bulletR;
+    static BufferedImage[] exploades = new BufferedImage[16];
     static {
         try {
             tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
@@ -26,6 +29,9 @@ public class ResourceMgr {
             bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
             bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
             bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
+            for (int i = 0; i<exploades.length; i++){
+                exploades[i] =ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e"+(i+1)+".gif"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

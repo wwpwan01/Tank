@@ -94,12 +94,14 @@ public class Bullet {
             default:
                 break;
         }
+        //存活属性
         if(x < 0 || y < 0 || y > tankFrame.GAME_HEIGHT || x > tankFrame.GAME_WIDTH){
-            this.living = false;
+            this.die();
         }
     }
 
     public void collidWith(Tank tank) {
+        //区分敌我，不伤害队友
         if(tank.getGroup() == this.group){
             return;
         }

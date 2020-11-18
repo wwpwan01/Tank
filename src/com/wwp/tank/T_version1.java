@@ -42,7 +42,7 @@ public class T_version1 {
 
        //初始化敌方坦克
         for (int i =0;i <= 5; i++){
-            tankFrame.tanks.add(new Tank(50+i*80,200,Dir.DOWN,Group.BED,tankFrame));
+            tankFrame.tanks.add(new Tank(50+i*80,200,Dir.LEFT,Group.BED,tankFrame));
         }
 
        //主线程每隔一定时间刷新窗口

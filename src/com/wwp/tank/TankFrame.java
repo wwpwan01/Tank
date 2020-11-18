@@ -24,6 +24,8 @@ public class TankFrame extends Frame {
 
     List<Tank> tanks = new ArrayList<Tank>();
 
+//    Exploades exploades = new Exploades(200,100,this);
+
 //    Bullet b = new Bullet(200, 200, Dir.DOWN,this);
 
     int GAME_WIDTH = 800, GAME_HEIGHT = 600;
@@ -99,12 +101,15 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
 
-        //碰撞检测
+        //碰撞检测  循环每个子弹合坦克
         for (int i = 0; i < bulletList.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
                 bulletList.get(i).collidWith(tanks.get(j));
             }
         }
+
+//        exploades.paint(g);
+
         /*
           迭代器删除元素会报错，每次会校验元素问题，不允许其他地方删除，可以在自己的迭代器内部删除
           迭代器有个内部同步状态，两个线程同时工作，一个负责迭代修改，另一个只迭代同步的时候就会报错
