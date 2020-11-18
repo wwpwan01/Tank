@@ -13,12 +13,12 @@ import java.util.List;
  * @author wwp
  * @version 1.0.0
  * @ClassName TankFrame.java
- * @Description TODO
+ * @Description 主战区域
  * @createTime 2020-11-10 20:35:00
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200, 400, Dir.DOWN, this);
+    Tank tank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
 
     List<Bullet> bulletList = new ArrayList<Bullet>();
 

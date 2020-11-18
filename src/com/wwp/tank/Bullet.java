@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0.0
  * @program tanke
  * @ClassName Bullet.java
- * @Description TODO
+ * @Description 子弹
  * @createTime 2020-11-17 15:30:00
  */
 public class Bullet {
@@ -21,6 +21,8 @@ public class Bullet {
 
     private boolean living = true;
 
+    private Group group = Group.BED;
+
     public boolean isLiving() {
         return living;
     }
@@ -29,10 +31,19 @@ public class Bullet {
         this.living = living;
     }
 
-    public Bullet(int x, int y, Dir dir, TankFrame tankFrame) {
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
     public Bullet(){
@@ -89,6 +100,9 @@ public class Bullet {
     }
 
     public void collidWith(Tank tank) {
+        if(tank.getGroup() == this.group){
+            return;
+        }
         Rectangle rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
         Rectangle rectangle1 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
         if (rectangle.intersects(rectangle1)){

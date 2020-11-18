@@ -1,18 +1,19 @@
 package com.wwp.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @author wwp
  * @version 1.0.0
  * @program tanke
  * @ClassName Tank.java
- * @Description TODO
+ * @Description 坦克类
  * @createTime 2020-11-17 14:29:00
  */
 public class Tank {
     private int x, y;
-    private boolean moving = false;
+    private boolean moving = true;
 
     private Dir dir = Dir.DOWN;
 
@@ -23,15 +24,22 @@ public class Tank {
 
     private boolean living = true;
 
-    public Tank(int x, int y, Dir dir, TankFrame tankFrame) {
+    //区分敌我
+    private Group group = Group.BED;
+
+    //随机方向
+    private Random random = new Random();
+
+    public Tank(int x, int y, Dir dir,Group group, TankFrame tankFrame) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
-    private final int SPEED = 10;
+    private final int SPEED = 5;
 
     public boolean isMoving() {
         return moving;
@@ -63,6 +71,14 @@ public class Tank {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public void paint(Graphics g) {
@@ -114,12 +130,15 @@ public class Tank {
             default:
                 break;
         }
+        if(random.nextInt(10) > 8) {
+            this.fire();
+        }
     }
 
     public void fire() {
         int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.tankFrame));
+        tankFrame.bulletList.add(new Bullet(bx, by, this.dir,this.group, this.tankFrame));
     }
 
     public void die() {
