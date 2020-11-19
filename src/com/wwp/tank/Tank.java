@@ -158,9 +158,6 @@ public class Tank {
                 break;
         }
 
-        rectangle.x = this.x;
-        rectangle.y = this.y;
-
         //坦克边界
         if (random.nextInt(100) > 95 && group != Group.GOOD) {
             this.fire();
@@ -168,6 +165,9 @@ public class Tank {
         }
         //坦克边界 停止 需要改为返回继续随机
         returnTank();
+        //更新边界检测对象
+        rectangle.x = this.x;
+        rectangle.y = this.y;
     }
 
     private void returnTank() {

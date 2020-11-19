@@ -102,7 +102,7 @@ public class Bullet {
             default:
                 break;
         }
-
+        //更新边界检测对象
         rectangle.x = this.x;
         rectangle.y = this.y;
         //存活属性
