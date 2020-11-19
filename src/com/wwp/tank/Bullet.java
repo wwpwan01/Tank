@@ -110,6 +110,9 @@ public class Bullet {
         if (rectangle.intersects(rectangle1)){
             tank.die();
             this.die();
+            int ex = tank.getX() + Tank.WIDTH/2 - Exploades.WIDTH/2;
+            int ey = tank.getY() + Tank.HEIGHT/2 - Exploades.HEIGHT/2;
+            tankFrame.exploades.add(new Exploades(ex,ey,tankFrame));
         }
     }
 

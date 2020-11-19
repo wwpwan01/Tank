@@ -161,7 +161,7 @@ public class Tank {
             }
         }
         //坦克边界
-        if(random.nextInt(10 ) > 8 && group != Group.GOOD) {
+        if(random.nextInt(100 ) > 95 && group != Group.GOOD) {
             this.fire();
             this.randomDir();
         }
@@ -188,6 +188,5 @@ public class Tank {
 
     public void die() {
         this.living = false;
-        tankFrame.exploades = new Exploades(this.x,this.y,tankFrame);
     }
 }

@@ -24,11 +24,11 @@ public class TankFrame extends Frame {
 
     List<Tank> tanks = new ArrayList<Tank>();
 
-    Exploades exploades;
+    List<Exploades> exploades = new ArrayList<>();
 
 //    Bullet b = new Bullet(200, 200, Dir.DOWN,this);
 
-    int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    int GAME_WIDTH = 1600, GAME_HEIGHT = 900;
 
     public TankFrame() {
         //窗口
@@ -100,15 +100,16 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tanks.size(); i++) {
             tanks.get(i).paint(g);
         }
+        //马老师写的爆炸效果
+        for (int i = 0; i < exploades.size(); i++) {
+            exploades.get(i).paint(g);
+        }
 
         //碰撞检测  循环每个子弹合坦克
         for (int i = 0; i < bulletList.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
                 bulletList.get(i).collidWith(tanks.get(j));
             }
-        }
-        if(exploades!=null){
-            exploades.paint(g);
         }
 
         /*
