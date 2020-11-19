@@ -34,7 +34,7 @@ public class Tank {
      */
     private Random random = new Random();
 
-    private Exploades exploades;
+//    private Exploades exploades;
 
     public Tank(int x, int y, Dir dir,Group group, TankFrame tankFrame) {
         super();
@@ -93,7 +93,7 @@ public class Tank {
     public void paint(Graphics g) {
         if(!living){
             tankFrame.tanks.remove(this);
-            exploades.paint(g);
+//            exploades.paint(g);
         }
         //填充矩形
 //        if(){
@@ -188,6 +188,6 @@ public class Tank {
 
     public void die() {
         this.living = false;
-        exploades = new Exploades(this.x,this.y,tankFrame);
+        tankFrame.exploades = new Exploades(this.x,this.y,tankFrame);
     }
 }

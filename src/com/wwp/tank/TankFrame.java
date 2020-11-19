@@ -24,7 +24,7 @@ public class TankFrame extends Frame {
 
     List<Tank> tanks = new ArrayList<Tank>();
 
-//    Exploades exploades = new Exploades(200,100,this);
+    Exploades exploades;
 
 //    Bullet b = new Bullet(200, 200, Dir.DOWN,this);
 
@@ -107,8 +107,9 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collidWith(tanks.get(j));
             }
         }
-
-//        exploades.paint(g);
+        if(exploades!=null){
+            exploades.paint(g);
+        }
 
         /*
           迭代器删除元素会报错，每次会校验元素问题，不允许其他地方删除，可以在自己的迭代器内部删除

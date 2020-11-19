@@ -54,7 +54,7 @@ public class Exploades {
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.exploades[temp++],x,y,null);
         if(temp>=ResourceMgr.exploades.length){
-            temp = 0;
+            tankFrame.exploades = null;
         }
         System.out.println("die");
     }
