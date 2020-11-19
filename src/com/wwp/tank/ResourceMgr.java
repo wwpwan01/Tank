@@ -15,18 +15,24 @@ import java.util.ArrayList;
  * @createTime 2020-11-18 11:20:00
  */
 public class ResourceMgr {
-    static BufferedImage tankL,tankU,tankD,tankR;
+    static BufferedImage goodTankL,goodTankU,goodTankD,goodTankR;
+    static BufferedImage badTankL,badTankU,badTankD,badTankR;
     static BufferedImage bulletL,bulletU,bulletD,bulletR;
     static BufferedImage[] exploades = new BufferedImage[16];
     static {
         try {
-            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
-            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
-            tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
-            tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
+            goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
+            goodTankL = ImageUtil.rotateImage(goodTankU,-90);
+            goodTankD = ImageUtil.rotateImage(goodTankU,180);
+            goodTankR = ImageUtil.rotateImage(goodTankU,90);
 
-            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
+            badTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+            badTankL = ImageUtil.rotateImage(badTankU,-90);
+            badTankD = ImageUtil.rotateImage(badTankU,180);
+            badTankR = ImageUtil.rotateImage(badTankU,90);
+
             bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
             bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
             bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
             for (int i = 0; i<exploades.length; i++){
