@@ -24,6 +24,8 @@ public class Tank {
 
     private boolean living = true;
 
+    Rectangle rectangle = new Rectangle();
+
     /**
      * 区分敌我
      */
@@ -36,16 +38,23 @@ public class Tank {
 
 //    private Exploades exploades;
 
-    public Tank(int x, int y, Dir dir,Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
-        if(group == Group.GOOD){
+
+        //我方坦克不动
+        if (group == Group.GOOD) {
             moving = false;
         }
+
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+        rectangle.width = WIDTH;
+        rectangle.height = HEIGHT;
     }
 
     private final int SPEED = 5;
@@ -91,7 +100,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if(!living){
+        if (!living) {
             tankFrame.tanks.remove(this);
 //            exploades.paint(g);
         }
@@ -127,53 +136,62 @@ public class Tank {
         if (!moving) {
             return;
         }
-        //坦克边界 停止 需要改为返回继续随机
-        if(x >= tankFrame.GAME_WIDTH-WIDTH || y >= tankFrame.GAME_HEIGHT-HEIGHT || x <= 0 || y <= 0){
-            return;
-        }else {
-            switch (dir) {
-                case LEFT:
-                    x -= SPEED;
-                    if(x <= 0){
-                        x += SPEED;
-                    }
-                    break;
-                case RIGHT:
-                    x += SPEED;
-                    if(x >= tankFrame.GAME_WIDTH-WIDTH){
-                        x -= SPEED;
-                    }
-                    break;
-                case UP:
-                    y -= SPEED;
-                    if(y <= 0){
-                        y += SPEED;
-                    }
-                    break;
-                case DOWN:
-                    y += SPEED;
-                    if(y >= tankFrame.GAME_HEIGHT-HEIGHT){
-                        y -= SPEED;
-                    }
-                    break;
-                default:
-                    break;
-            }
+
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+
+                break;
+            case RIGHT:
+                x += SPEED;
+
+                break;
+            case UP:
+                y -= SPEED;
+
+                break;
+            case DOWN:
+                y += SPEED;
+
+                break;
+            default:
+                break;
         }
+
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+
         //坦克边界
-        if(random.nextInt(100 ) > 95 && group != Group.GOOD) {
+        if (random.nextInt(100) > 95 && group != Group.GOOD) {
             this.fire();
             this.randomDir();
+        }
+        //坦克边界 停止 需要改为返回继续随机
+        returnTank();
+    }
+
+    private void returnTank() {
+        if (x <= 0) {
+            x += SPEED;
+        }
+        if (x >= tankFrame.GAME_WIDTH - WIDTH) {
+            x -= SPEED;
+        }
+        if (y <= 10) {
+            y += SPEED;
+        }
+        if (y >= tankFrame.GAME_HEIGHT - HEIGHT) {
+            y -= SPEED;
         }
     }
 
     /**
+     * @return
+     * @throws
      * @author wwp
      * @description 随机移动
      * @Params
      * @updateTime 2020/11/18 19:46
-     * @throws
-     * @return
      */
     private void randomDir() {
         int i = random.nextInt(Dir.values().length);
@@ -181,9 +199,9 @@ public class Tank {
     }
 
     public void fire() {
-        int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-        tankFrame.bulletList.add(new Bullet(bx, by, this.dir,this.group, this.tankFrame));
+        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.group, this.tankFrame));
     }
 
     public void die() {

@@ -23,6 +23,8 @@ public class Bullet {
 
     private Group group = Group.BED;
 
+    Rectangle rectangle = new Rectangle();
+
     public boolean isLiving() {
         return living;
     }
@@ -45,6 +47,12 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+        rectangle.width = WIDTH;
+        rectangle.height = HEIGHT;
+
     }
     public Bullet(){
 
@@ -94,6 +102,9 @@ public class Bullet {
             default:
                 break;
         }
+
+        rectangle.x = this.x;
+        rectangle.y = this.y;
         //存活属性
         if(x < 0 || y < 0 || y > tankFrame.GAME_HEIGHT || x > tankFrame.GAME_WIDTH){
             this.die();
@@ -105,9 +116,7 @@ public class Bullet {
         if(tank.getGroup() == this.group){
             return;
         }
-        Rectangle rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
-        Rectangle rectangle1 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
-        if (rectangle.intersects(rectangle1)){
+        if (rectangle.intersects(tank.rectangle)){
             tank.die();
             this.die();
             int ex = tank.getX() + Tank.WIDTH/2 - Exploades.WIDTH/2;
