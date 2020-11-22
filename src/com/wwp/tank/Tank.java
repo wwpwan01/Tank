@@ -159,8 +159,12 @@ public class Tank {
         }
 
         //坦克边界
+//        BulletFourDirFirs bulletFirs;
+        BulletOneDirFirs bulletFirs;
         if (random.nextInt(100) > 95 && group != Group.GOOD) {
-            this.fire();
+            bulletFirs = new BulletOneDirFirs();
+            bulletFirs.fir(this,tankFrame);
+//            this.fire();
             this.randomDir();
         }
         //坦克边界 停止 需要改为返回继续随机
