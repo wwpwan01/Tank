@@ -20,7 +20,7 @@ public class Tank {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    private TankFrame tankFrame;
+    TankFrame tankFrame;
 
     private boolean living = true;
 
@@ -35,6 +35,8 @@ public class Tank {
      * 随机方向
      */
     private Random random = new Random();
+
+    BulletStrategy bulletFirs;
 
 //    private Exploades exploades;
 
@@ -55,6 +57,22 @@ public class Tank {
         rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+
+        if(group == Group.GOOD){
+//            bulletFirs = new BulletFourDirFirs();
+            String goodBullet = PropertyMsg.get("goodBullet");
+            try {
+                bulletFirs = (BulletStrategy) Class.forName(goodBullet).newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }else {
+            bulletFirs = new BulletOneDirFirs();
+        }
     }
 
     private final int SPEED = 5;
@@ -160,11 +178,11 @@ public class Tank {
 
         //坦克边界
 //        BulletFourDirFirs bulletFirs;
-        BulletOneDirFirs bulletFirs;
+
         if (random.nextInt(100) > 95 && group != Group.GOOD) {
-            bulletFirs = new BulletOneDirFirs();
-            bulletFirs.fir(this,tankFrame);
-//            this.fire();
+//            bulletFirs = new BulletOneDirFirs();
+//            bulletFirs.fir(this);
+            this.fire();
             this.randomDir();
         }
         //坦克边界 停止 需要改为返回继续随机
@@ -203,9 +221,10 @@ public class Tank {
     }
 
     public void fire() {
-        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.group, this.tankFrame));
+//        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+//        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+//        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.group, this.tankFrame));
+        bulletFirs.fir(this);
     }
 
     public void die() {

@@ -12,8 +12,8 @@ import java.awt.*;
  */
 public class Bullet {
     private static final int SPEED = 10;
-    public static int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public static int WIDTH = ResourceMgr.bulletU.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletU.getHeight();
     private int x,y;
     private Dir dir;
 
@@ -53,6 +53,7 @@ public class Bullet {
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
 
+        tankFrame.bulletList.add(this);
     }
     public Bullet(){
 

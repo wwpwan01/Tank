@@ -1,1 +1,2 @@
 initTankNum=10
+goodBullet=com.wwp.tank.BulletOneDirFirs
