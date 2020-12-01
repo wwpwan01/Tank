@@ -1,5 +1,7 @@
 package com.wwp.tank;
 
+import com.wwp.factory.BaseBullet;
+
 import java.awt.*;
 
 /**
@@ -10,7 +12,7 @@ import java.awt.*;
  * @Description 子弹
  * @createTime 2020-11-17 15:30:00
  */
-public class Bullet {
+public class Bullet extends BaseBullet {
     private static final int SPEED = 10;
     public static int WIDTH = ResourceMgr.bulletU.getWidth();
     public static int HEIGHT = ResourceMgr.bulletU.getHeight();
@@ -122,7 +124,8 @@ public class Bullet {
             this.die();
             int ex = tank.getX() + Tank.WIDTH/2 - Exploades.WIDTH/2;
             int ey = tank.getY() + Tank.HEIGHT/2 - Exploades.HEIGHT/2;
-            tankFrame.exploades.add(new Exploades(ex,ey,tankFrame));
+//            tankFrame.exploades.add(new Exploades(ex,ey,tankFrame));
+            tankFrame.exploades.add(tankFrame.gameFactory.createExploades(ex,ey,dir,group,tankFrame));
         }
     }
 

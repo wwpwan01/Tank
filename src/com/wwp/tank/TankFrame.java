@@ -1,5 +1,8 @@
 package com.wwp.tank;
 
+import com.wwp.factory.BaseExploades;
+import com.wwp.factory.GameFactory;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -24,13 +27,18 @@ public class TankFrame extends Frame {
 
     List<Tank> tanks = new ArrayList<Tank>();
 
-    List<Exploades> exploades = new ArrayList<>();
+    public List<BaseExploades> exploades = new ArrayList<>();
 
 //    Bullet b = new Bullet(200, 200, Dir.DOWN,this);
 
-    int GAME_WIDTH = 1600, GAME_HEIGHT = 900;
+    int GAME_WIDTH, GAME_HEIGHT;
+
+    GameFactory gameFactory;
 
     public TankFrame() {
+        try {
+        GAME_WIDTH = Integer.valueOf(PropertyMsg.get("gameWidth"));
+        GAME_HEIGHT = Integer.valueOf(PropertyMsg.get("gameWidth"));
         //窗口
         //窗口大小
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -50,6 +58,15 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+
+            gameFactory =(GameFactory) Class.forName(PropertyMsg.get("gameStyle")).newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -92,7 +109,6 @@ public class TankFrame extends Frame {
         g.drawString(String.valueOf(tanks.size()), 10, 80);
         g.setColor(color);
         tank.paint(g);
-//        b.paint(g);
         for (int i = 0; i < bulletList.size(); i++) {
             bulletList.get(i).paint(g);
         }

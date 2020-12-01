@@ -1,2 +1,5 @@
 initTankNum=10
-goodBullet=com.wwp.tank.BulletOneDirFirs
+goodBullet=com.wwp.tank.BulletFourDirFirs
+gameStyle=com.wwp.factory.RectFactory
+gameWidth=800
+gameHight=600

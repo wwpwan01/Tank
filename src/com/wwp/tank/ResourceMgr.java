@@ -15,10 +15,10 @@ import java.util.ArrayList;
  * @createTime 2020-11-18 11:20:00
  */
 public class ResourceMgr {
-    static BufferedImage goodTankL,goodTankU,goodTankD,goodTankR;
-    static BufferedImage badTankL,badTankU,badTankD,badTankR;
-    static BufferedImage bulletL,bulletU,bulletD,bulletR;
-    static BufferedImage[] exploades = new BufferedImage[16];
+    public static BufferedImage goodTankL,goodTankU,goodTankD,goodTankR;
+    public static BufferedImage badTankL,badTankU,badTankD,badTankR;
+    public static BufferedImage bulletL,bulletU,bulletD,bulletR;
+    public static BufferedImage[] exploades = new BufferedImage[16];
     static {
         try {
             goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));

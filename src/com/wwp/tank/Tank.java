@@ -1,5 +1,7 @@
 package com.wwp.tank;
 
+import com.wwp.factory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -11,7 +13,7 @@ import java.util.Random;
  * @Description 坦克类
  * @createTime 2020-11-17 14:29:00
  */
-public class Tank {
+public class Tank extends BaseTank {
     private int x, y;
     private boolean moving = true;
 
@@ -59,7 +61,6 @@ public class Tank {
         rectangle.height = HEIGHT;
 
         if(group == Group.GOOD){
-//            bulletFirs = new BulletFourDirFirs();
             String goodBullet = PropertyMsg.get("goodBullet");
             try {
                 bulletFirs = (BulletStrategy) Class.forName(goodBullet).newInstance();
@@ -117,6 +118,7 @@ public class Tank {
         this.group = group;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             tankFrame.tanks.remove(this);
