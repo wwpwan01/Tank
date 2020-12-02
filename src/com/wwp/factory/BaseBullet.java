@@ -1,5 +1,9 @@
 package com.wwp.factory;
 
+import com.wwp.tank.ResourceMgr;
+import com.wwp.tank.Tank;
+import com.wwp.tank.TankFrame;
+
 import java.awt.*;
 
 /**
@@ -12,5 +16,12 @@ import java.awt.*;
  */
 public abstract class BaseBullet {
 
+    public static int WIDTH = ResourceMgr.bulletU.getWidth();
+    public static int HEIGHT = ResourceMgr.bulletU.getHeight();
+
+    protected TankFrame tankFrame;
+
     public abstract void paint(Graphics g);
+
+    public abstract void collidWith(BaseTank tank);
 }

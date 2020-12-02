@@ -1,7 +1,6 @@
-package com.wwp.tank;
+package com.wwp.factory;
 
-import com.wwp.factory.BaseBullet;
-import com.wwp.factory.BaseTank;
+import com.wwp.tank.*;
 
 import java.awt.*;
 
@@ -13,13 +12,11 @@ import java.awt.*;
  * @Description 子弹
  * @createTime 2020-11-17 15:30:00
  */
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
     private static final int SPEED = 10;
 
-    private int x, y;
+    private int x,y;
     private Dir dir;
-
-    private TankFrame tankFrame;
 
     private boolean living = true;
 
@@ -43,7 +40,7 @@ public class Bullet extends BaseBullet {
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public RectBullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -57,41 +54,23 @@ public class Bullet extends BaseBullet {
 
         tankFrame.bulletList.add(this);
     }
-
-    public Bullet() {
+    public RectBullet(){
 
     }
-
     @Override
     public void paint(Graphics g) {
-        if (!living) {
+        if(!living){
             tankFrame.bulletList.remove(this);
         }
-//        Color c = g.getColor();
-//        g.setColor(Color.RED);
-//        //填充矩形
-//        g.fillOval(x, y, TANK_WIDTH, TANK_HEIGHT);
-//        g.setColor(c);
-        switch (dir) {
-            case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null);
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null);
-                break;
-            case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null);
-                break;
-            default:
-                break;
-        }
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        //填充矩形
+        g.fillRect(x, y, 10, 10);
+        g.setColor(c);
+
         move();
 
     }
-
     private void move() {
         switch (dir) {
             case LEFT:
@@ -113,7 +92,7 @@ public class Bullet extends BaseBullet {
         rectangle.x = this.x;
         rectangle.y = this.y;
         //存活属性
-        if (x < 0 || y < 0 || y > tankFrame.GAME_HEIGHT || x > tankFrame.GAME_WIDTH) {
+        if(x < 0 || y < 0 || y > tankFrame.GAME_HEIGHT || x > tankFrame.GAME_WIDTH){
             this.die();
         }
     }
@@ -121,16 +100,16 @@ public class Bullet extends BaseBullet {
     @Override
     public void collidWith(BaseTank tank) {
         //区分敌我，不伤害队友
-        if (tank.getGroup() == this.group) {
+        if(tank.getGroup() == this.group){
             return;
         }
-        if (rectangle.intersects(tank.rectangle)) {
+        if (rectangle.intersects(tank.rectangle)){
             tank.die();
             this.die();
-            int ex = tank.getX() + Tank.WIDTH / 2 - Exploades.WIDTH / 2;
-            int ey = tank.getY() + Tank.HEIGHT / 2 - Exploades.HEIGHT / 2;
+            int ex = tank.getX() + Tank.WIDTH/2 - Exploades.WIDTH/2;
+            int ey = tank.getY() + Tank.HEIGHT/2 - Exploades.HEIGHT/2;
 //            tankFrame.exploades.add(new Exploades(ex,ey,tankFrame));
-            tankFrame.exploades.add(tankFrame.gameFactory.createExploades(ex, ey, dir, group, tankFrame));
+            tankFrame.exploades.add(tankFrame.gameFactory.createExploades(ex,ey,dir,group,tankFrame));
         }
     }
 

@@ -27,7 +27,7 @@ public class RectExploades extends BaseExploades {
         g.fillRect(x,y,10*temp,10*temp);
         temp++;
         g.setColor(color);
-        if(temp>16){
+        if(temp>9){
             tankFrame.exploades.remove(this);
         }
         System.out.println("die");

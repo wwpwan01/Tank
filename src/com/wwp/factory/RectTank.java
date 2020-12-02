@@ -1,6 +1,6 @@
-package com.wwp.tank;
+package com.wwp.factory;
 
-import com.wwp.factory.BaseTank;
+import com.wwp.tank.*;
 
 import java.awt.*;
 import java.util.Random;
@@ -13,14 +13,13 @@ import java.util.Random;
  * @Description 坦克类
  * @createTime 2020-11-17 14:29:00
  */
-public class Tank extends BaseTank {
-
+public class RectTank extends BaseTank {
 
 //    BulletStrategy bulletFirs;
 
 //    private Exploades exploades;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public RectTank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
         super();
         this.x = x;
         this.y = y;
@@ -56,27 +55,20 @@ public class Tank extends BaseTank {
 
     private final int SPEED = 5;
 
+
     @Override
     public void paint(Graphics g) {
         if (!living) {
             tankFrame.tanks.remove(this);
         }
-        switch (dir) {
-            case DOWN:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
-                break;
-            case UP:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
-                break;
-            case LEFT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankL: ResourceMgr.badTankL, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(this.group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
-                break;
-            default:
-                break;
+        Color c = g.getColor();
+        // 填充矩形
+        g.setColor(Color.BLUE);
+        if(group == Group.GOOD){
+            g.setColor(Color.RED);
         }
+        g.fillRect(x, y, WIDTH, HEIGHT);
+        g.setColor(c);
         move();
 
     }

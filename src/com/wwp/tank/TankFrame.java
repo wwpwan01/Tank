@@ -1,6 +1,8 @@
 package com.wwp.tank;
 
+import com.wwp.factory.BaseBullet;
 import com.wwp.factory.BaseExploades;
+import com.wwp.factory.BaseTank;
 import com.wwp.factory.GameFactory;
 
 import java.awt.*;
@@ -21,19 +23,19 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
+    public BaseTank tank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
 
-    List<Bullet> bulletList = new ArrayList<Bullet>();
+    public List<BaseBullet> bulletList = new ArrayList<BaseBullet>();
 
-    List<Tank> tanks = new ArrayList<Tank>();
+    public List<BaseTank> tanks = new ArrayList<BaseTank>();
 
     public List<BaseExploades> exploades = new ArrayList<>();
 
 //    Bullet b = new Bullet(200, 200, Dir.DOWN,this);
 
-    int GAME_WIDTH, GAME_HEIGHT;
+    public int GAME_WIDTH, GAME_HEIGHT;
 
-    GameFactory gameFactory;
+    public GameFactory gameFactory;
 
     public TankFrame() {
         try {
