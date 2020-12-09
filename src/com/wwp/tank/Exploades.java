@@ -18,7 +18,7 @@ public class Exploades {
 
     private boolean living;
 
-    TankFrame tankFrame;
+    GameModle gm;
 
     private int temp = 0;
     public int getX() {
@@ -45,16 +45,16 @@ public class Exploades {
         this.living = living;
     }
 
-    public Exploades(int x, int y, TankFrame tankFrame) {
+    public Exploades(int x, int y, GameModle gameModle) {
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        this.gm = gameModle;
     }
 
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.exploades[temp++],x,y,null);
         if(temp>=ResourceMgr.exploades.length){
-            tankFrame.exploades.remove(this);
+            gm.exploades.remove(this);
         }
         System.out.println("die");
     }

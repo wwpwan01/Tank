@@ -10,5 +10,5 @@ package com.wwp.tank;
  */
 public interface BulletStrategy<T> {
 
-    void fir(T tank,TankFrame tankFrame);
+    void fir(T tank,GameModle tankFrame);
 }

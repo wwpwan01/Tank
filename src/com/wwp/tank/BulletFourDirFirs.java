@@ -11,7 +11,7 @@ package com.wwp.tank;
 public class BulletFourDirFirs implements BulletStrategy<Tank> {
 
     @Override
-    public void fir(Tank tank,TankFrame tankFrame) {
+    public void fir(Tank tank,GameModle tankFrame) {
         int bx = tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         tankFrame.bulletList.add(new Bullet(bx, by, Dir.UP, tank.getGroup(), tankFrame));

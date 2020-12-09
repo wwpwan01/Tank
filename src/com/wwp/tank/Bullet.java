@@ -17,13 +17,13 @@ public class Bullet {
     private int x,y;
     private Dir dir;
 
-    private TankFrame tankFrame;
-
     private boolean living = true;
 
     private Group group = Group.BED;
 
     Rectangle rectangle = new Rectangle();
+
+    GameModle gm;
 
     public boolean isLiving() {
         return living;
@@ -41,12 +41,12 @@ public class Bullet {
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModle gameModle) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gm = gameModle;
 
         rectangle.x = this.x;
         rectangle.y = this.y;
@@ -59,7 +59,7 @@ public class Bullet {
     }
     public void paint(Graphics g) {
         if(!living){
-            tankFrame.bulletList.remove(this);
+            gm.bulletList.remove(this);
         }
 //        Color c = g.getColor();
 //        g.setColor(Color.RED);
@@ -106,7 +106,7 @@ public class Bullet {
         rectangle.x = this.x;
         rectangle.y = this.y;
         //存活属性
-        if(x < 0 || y < 0 || y > tankFrame.GAME_HEIGHT || x > tankFrame.GAME_WIDTH){
+        if(x < 0 || y < 0 || y > gm.GAME_HEIGHT || x > gm.GAME_WIDTH){
             this.die();
         }
     }
@@ -121,7 +121,7 @@ public class Bullet {
             this.die();
             int ex = tank.getX() + Tank.WIDTH/2 - Exploades.WIDTH/2;
             int ey = tank.getY() + Tank.HEIGHT/2 - Exploades.HEIGHT/2;
-            tankFrame.exploades.add(new Exploades(ex,ey,tankFrame));
+            gm.exploades.add(new Exploades(ex,ey,gm));
         }
     }
 

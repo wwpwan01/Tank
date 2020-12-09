@@ -20,8 +20,6 @@ public class Tank {
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-    private TankFrame tankFrame;
-
     private boolean living = true;
 
     Rectangle rectangle = new Rectangle();
@@ -36,15 +34,15 @@ public class Tank {
      */
     private Random random = new Random();
 
-//    private Exploades exploades;
+    private GameModle gm;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir, Group group, GameModle gameModle) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tankFrame = tankFrame;
+        this.gm = gameModle;
 
         //我方坦克不动
         if (group == Group.GOOD) {
@@ -101,7 +99,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!living) {
-            tankFrame.tanks.remove(this);
+            gm.tanks.remove(this);
 //            exploades.paint(g);
         }
         //填充矩形
@@ -163,7 +161,7 @@ public class Tank {
         BulletOneDirFirs bulletFirs;
         if (random.nextInt(100) > 95 && group != Group.GOOD) {
             bulletFirs = new BulletOneDirFirs();
-            bulletFirs.fir(this,tankFrame);
+            bulletFirs.fir(this,gm);
 //            this.fire();
             this.randomDir();
         }
@@ -178,13 +176,13 @@ public class Tank {
         if (x <= 0) {
             x += SPEED;
         }
-        if (x >= tankFrame.GAME_WIDTH - WIDTH) {
+        if (x >= gm.GAME_WIDTH - WIDTH) {
             x -= SPEED;
         }
         if (y <= 10) {
             y += SPEED;
         }
-        if (y >= tankFrame.GAME_HEIGHT - HEIGHT) {
+        if (y >= gm.GAME_HEIGHT - HEIGHT) {
             y -= SPEED;
         }
     }
@@ -205,7 +203,13 @@ public class Tank {
     public void fire() {
         int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.bulletList.add(new Bullet(bx, by, this.dir, this.group, this.tankFrame));
+        if(group == Group.GOOD){
+            for (Dir dir : Dir.values()){
+                gm.bulletList.add(new Bullet(bx, by, dir, this.group, this.gm));
+            }
+        }else {
+            gm.bulletList.add(new Bullet(bx, by, this.dir, this.group, this.gm));
+        }
     }
 
     public void die() {

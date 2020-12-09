@@ -18,22 +18,16 @@ import java.util.List;
  */
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
-
-    List<Bullet> bulletList = new ArrayList<Bullet>();
-
-    List<Tank> tanks = new ArrayList<Tank>();
-
-    List<Exploades> exploades = new ArrayList<>();
+    GameModle gameModle = new GameModle();
 
 //    Bullet b = new Bullet(200, 200, Dir.DOWN,this);
 
-    int GAME_WIDTH = 1600, GAME_HEIGHT = 900;
+
 
     public TankFrame() {
         //窗口
         //窗口大小
-        setSize(GAME_WIDTH, GAME_HEIGHT);
+        setSize(gameModle.GAME_WIDTH, gameModle.GAME_HEIGHT);
         //是否可以改版大小
         setResizable(false);
         //窗口标题
@@ -66,12 +60,12 @@ public class TankFrame extends Frame {
     @Override
     public void update(Graphics g) {
         if (ima == null) {
-            ima = this.createImage(GAME_WIDTH, GAME_WIDTH);
+            ima = this.createImage(gameModle.GAME_WIDTH, gameModle.GAME_WIDTH);
         }
         Graphics graphics = ima.getGraphics();
         Color c = graphics.getColor();
         graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        graphics.fillRect(0, 0, gameModle.GAME_WIDTH, gameModle.GAME_HEIGHT);
         graphics.setColor(c);
         paint(graphics);
         g.drawImage(ima, 0, 0, null);
@@ -86,31 +80,8 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        Color color = g.getColor();
-        g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(bulletList.size()), 10, 60);
-        g.drawString(String.valueOf(tanks.size()), 10, 80);
-        g.setColor(color);
-        tank.paint(g);
-//        b.paint(g);
-        for (int i = 0; i < bulletList.size(); i++) {
-            bulletList.get(i).paint(g);
-        }
+        gameModle.paint(g);
 
-        for (int i = 0; i < tanks.size(); i++) {
-            tanks.get(i).paint(g);
-        }
-        //马老师写的爆炸效果
-        for (int i = 0; i < exploades.size(); i++) {
-            exploades.get(i).paint(g);
-        }
-
-        //碰撞检测  循环每个子弹合坦克
-        for (int i = 0; i < bulletList.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bulletList.get(i).collidWith(tanks.get(j));
-            }
-        }
 
         /*
           迭代器删除元素会报错，每次会校验元素问题，不允许其他地方删除，可以在自己的迭代器内部删除
@@ -151,7 +122,7 @@ public class TankFrame extends Frame {
                     BD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    tank.fire();
+                    gameModle.getMainTank().fire();
                     break;
                 default:
                     break;
@@ -161,21 +132,22 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
+            Tank mainTank = gameModle.getMainTank();
             if (!BL && !BR && !BU && !BD) {
-                tank.setMoving(false);
+                mainTank.setMoving(false);
             } else {
-                tank.setMoving(true);
+                mainTank.setMoving(true);
                 if (BL) {
-                    tank.setDir(Dir.LEFT);
+                   mainTank.setDir(Dir.LEFT);
                 }
                 if (BR) {
-                    tank.setDir(Dir.RIGHT);
+                   mainTank.setDir(Dir.RIGHT);
                 }
                 if (BU) {
-                    tank.setDir(Dir.UP);
+                   mainTank.setDir(Dir.UP);
                 }
                 if (BD) {
-                    tank.setDir(Dir.DOWN);
+                   mainTank.setDir(Dir.DOWN);
                 }
             }
         }
