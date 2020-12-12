@@ -1,4 +1,6 @@
-package com.wwp.tank;
+package com.wwp.strategy;
+
+import com.wwp.tank.GameModle;
 
 /**
  * @author wwp
@@ -10,5 +12,5 @@ package com.wwp.tank;
  */
 public interface BulletStrategy<T> {
 
-    void fir(T tank,GameModle tankFrame);
+    void fir(T tank, GameModle tankFrame);
 }

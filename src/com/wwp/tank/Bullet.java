@@ -10,18 +10,20 @@ import java.awt.*;
  * @Description 子弹
  * @createTime 2020-11-17 15:30:00
  */
-public class Bullet {
+public class Bullet extends GameObject{
     private static final int SPEED = 10;
     public static int WIDTH = ResourceMgr.bulletD.getWidth();
     public static int HEIGHT = ResourceMgr.bulletD.getHeight();
-    private int x,y;
+
+//    private int x,y;
+
     private Dir dir;
 
     private boolean living = true;
 
     private Group group = Group.BED;
 
-    Rectangle rectangle = new Rectangle();
+    public Rectangle rectangle = new Rectangle();
 
     GameModle gm;
 
@@ -57,9 +59,10 @@ public class Bullet {
     public Bullet(){
 
     }
+    @Override
     public void paint(Graphics g) {
         if(!living){
-            gm.bulletList.remove(this);
+            gm.gameObjectArrayList.remove(this);
         }
 //        Color c = g.getColor();
 //        g.setColor(Color.RED);
@@ -85,6 +88,22 @@ public class Bullet {
         move();
 
     }
+
+    @Override
+    public void exploades(Exploades exploades) {
+
+    }
+
+    @Override
+    public void returnLastDir(Dir dir) {
+
+    }
+
+    @Override
+    public void stop() {
+        
+    }
+
     private void move() {
         switch (dir) {
             case LEFT:
@@ -111,21 +130,8 @@ public class Bullet {
         }
     }
 
-    public void collidWith(Tank tank) {
-        //区分敌我，不伤害队友
-        if(tank.getGroup() == this.group){
-            return;
-        }
-        if (rectangle.intersects(tank.rectangle)){
-            tank.die();
-            this.die();
-            int ex = tank.getX() + Tank.WIDTH/2 - Exploades.WIDTH/2;
-            int ey = tank.getY() + Tank.HEIGHT/2 - Exploades.HEIGHT/2;
-            gm.exploades.add(new Exploades(ex,ey,gm));
-        }
-    }
-
-    private void die() {
+    public void die() {
         this.living = false;
+        gm.gameObjectArrayList.remove(this);
     }
 }

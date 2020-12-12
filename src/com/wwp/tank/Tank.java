@@ -1,5 +1,7 @@
 package com.wwp.tank;
 
+import com.wwp.strategy.BulletOneDirFirs;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -11,8 +13,9 @@ import java.util.Random;
  * @Description 坦克类
  * @createTime 2020-11-17 14:29:00
  */
-public class Tank {
-    private int x, y;
+public class Tank extends GameObject {
+//    private int x, y;
+
     private boolean moving = true;
 
     private Dir dir = Dir.DOWN;
@@ -22,7 +25,7 @@ public class Tank {
 
     private boolean living = true;
 
-    Rectangle rectangle = new Rectangle();
+    public Rectangle rectangle = new Rectangle();
 
     /**
      * 区分敌我
@@ -35,6 +38,14 @@ public class Tank {
     private Random random = new Random();
 
     private GameModle gm;
+
+    public GameModle getGm() {
+        return gm;
+    }
+
+    public void setGm(GameModle gm) {
+        this.gm = gm;
+    }
 
     public Tank(int x, int y, Dir dir, Group group, GameModle gameModle) {
         super();
@@ -97,9 +108,10 @@ public class Tank {
         this.group = group;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.tanks.remove(this);
+            gm.gameObjectArrayList.remove(this);
 //            exploades.paint(g);
         }
         //填充矩形
@@ -128,6 +140,38 @@ public class Tank {
         }
         move();
 
+    }
+
+    @Override
+    public void exploades(Exploades exploades) {
+        gm.gameObjectArrayList.add(exploades);
+    }
+
+    @Override
+    public void returnLastDir(Dir dir) {
+        switch (dir) {
+            case LEFT:
+                this.dir = Dir.RIGHT;
+                break;
+            case RIGHT:
+                this.dir = Dir.LEFT;
+                break;
+            case UP:
+                this.dir = Dir.DOWN;
+                break;
+            case DOWN:
+                this.dir = Dir.UP;
+                break;
+            default:
+                break;
+        }
+
+        returnTank();
+    }
+
+    @Override
+    public void stop() {
+        moving = false;
     }
 
     private void move() {
@@ -205,14 +249,15 @@ public class Tank {
         int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         if(group == Group.GOOD){
             for (Dir dir : Dir.values()){
-                gm.bulletList.add(new Bullet(bx, by, dir, this.group, this.gm));
+                gm.gameObjectArrayList.add(new Bullet(bx, by, dir, this.group, this.gm));
             }
         }else {
-            gm.bulletList.add(new Bullet(bx, by, this.dir, this.group, this.gm));
+            gm.gameObjectArrayList.add(new Bullet(bx, by, this.dir, this.group, this.gm));
         }
     }
 
     public void die() {
         this.living = false;
+        gm.gameObjectArrayList.remove(this);
     }
 }
