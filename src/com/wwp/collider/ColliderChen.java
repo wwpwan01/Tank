@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0.0
  * @program Tank
  * @ClassName ColliderChen.java
- * @Description
+ * @Description 责任链模式
  * @createTime 2020-12-10 21:50:00
  */
 public class ColliderChen {

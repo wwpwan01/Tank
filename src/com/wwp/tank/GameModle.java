@@ -14,7 +14,7 @@ import java.util.List;
  * @version 1.0.0
  * @program Tank
  * @ClassName GameModle.java
- * @Description TODO
+ * @Description 门面模式
  * @createTime 2020-12-09 21:03:00
  */
 public class GameModle {

@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0.0
  * @program Tank
  * @ClassName GameObject.java
- * @Description TODO
+ * @Description 调停者模式
  * @createTime 2020-12-09 21:49:00
  */
 public abstract class GameObject {
