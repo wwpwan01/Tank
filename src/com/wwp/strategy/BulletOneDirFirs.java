@@ -17,6 +17,6 @@ public class BulletOneDirFirs implements BulletStrategy<Tank> {
     public void fir(Tank tank, GameModle tankFrame) {
         int bx = tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.gameObjectArrayList.add(new Bullet(bx, by, tank.getDir(), tank.getGroup(), tankFrame));
+        tankFrame.add(new Bullet(bx, by, tank.getDir(), tank.getGroup(), tankFrame));
     }
 }

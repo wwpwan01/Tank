@@ -111,7 +111,7 @@ public class Tank extends GameObject {
     @Override
     public void paint(Graphics g) {
         if (!living) {
-            gm.gameObjectArrayList.remove(this);
+            gm.remove(this);
 //            exploades.paint(g);
         }
         //填充矩形
@@ -144,7 +144,7 @@ public class Tank extends GameObject {
 
     @Override
     public void exploades(Exploades exploades) {
-        gm.gameObjectArrayList.add(exploades);
+        gm.add(exploades);
     }
 
     @Override
@@ -249,15 +249,15 @@ public class Tank extends GameObject {
         int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         if(group == Group.GOOD){
             for (Dir dir : Dir.values()){
-                gm.gameObjectArrayList.add(new Bullet(bx, by, dir, this.group, this.gm));
+                gm.add(new Bullet(bx, by, dir, this.group, this.gm));
             }
         }else {
-            gm.gameObjectArrayList.add(new Bullet(bx, by, this.dir, this.group, this.gm));
+            gm.add(new Bullet(bx, by, this.dir, this.group, this.gm));
         }
     }
 
     public void die() {
         this.living = false;
-        gm.gameObjectArrayList.remove(this);
+        gm.remove(this);
     }
 }

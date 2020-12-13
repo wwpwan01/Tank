@@ -28,16 +28,15 @@ public class TankTankCollider implements Collider {
 //                    bullet.die();
 //                    int ex = tank.getX() + Tank.WIDTH / 2 - Exploades.WIDTH / 2;
 //                    int ey = tank.getY() + Tank.HEIGHT / 2 - Exploades.HEIGHT / 2;
-//                    gm.gameObjectArrayList.add(new Exploades(ex, ey, gm));
+//                    gm.add(new Exploades(ex, ey, gm));
 //                    tank2.returnLastDir(tank.getDir());
 //                    tank.returnLastDir(tank.getX(),tank.getY(),tank.getDir());
                     tank.stop();
                     tank2.stop();
-                    return true;
+                    return false;
                 }
-                return false;
             }
         }
-        return false;
+        return true;
     }
 }

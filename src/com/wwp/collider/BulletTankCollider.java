@@ -21,7 +21,7 @@ public class BulletTankCollider implements Collider {
             Tank tank = (Tank) g2;
             //区分敌我，不伤害队友
             if (tank.getGroup() == bullet.getGroup()) {
-                return false;
+                return true;
             } else {
                 if (bullet.rectangle.intersects(tank.rectangle)) {
                     System.out.println("撞到了-------");
@@ -30,28 +30,13 @@ public class BulletTankCollider implements Collider {
                     int ey = tank.getY() + Tank.HEIGHT / 2 - Exploades.HEIGHT / 2;
                     tank.die();
                     tank.exploades(new Exploades(ex, ey, tank.getGm()));
-                    return true;
+                    return false;
                 }
             }
         }
         if (g2 instanceof Bullet && g1 instanceof Tank) {
-            Bullet bullet = (Bullet) g2;
-            Tank tank = (Tank) g1;
-            //区分敌我，不伤害队友
-            if (tank.getGroup() == bullet.getGroup()) {
-                return false;
-            } else {
-                if (bullet.rectangle.intersects(tank.rectangle)) {
-                    System.out.println("撞到了-------");
-                    bullet.die();
-                    int ex = tank.getX() + Tank.WIDTH / 2 - Exploades.WIDTH / 2;
-                    int ey = tank.getY() + Tank.HEIGHT / 2 - Exploades.HEIGHT / 2;
-                    tank.die();
-                    tank.exploades(new Exploades(ex, ey, tank.getGm()));
-                    return true;
-                }
-            }
+            collide(g2,g1);
         }
-        return false;
+        return true;
     }
 }

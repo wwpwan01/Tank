@@ -62,7 +62,7 @@ public class Bullet extends GameObject{
     @Override
     public void paint(Graphics g) {
         if(!living){
-            gm.gameObjectArrayList.remove(this);
+            gm.remove(this);
         }
 //        Color c = g.getColor();
 //        g.setColor(Color.RED);
@@ -101,7 +101,7 @@ public class Bullet extends GameObject{
 
     @Override
     public void stop() {
-        
+
     }
 
     private void move() {
@@ -132,6 +132,6 @@ public class Bullet extends GameObject{
 
     public void die() {
         this.living = false;
-        gm.gameObjectArrayList.remove(this);
+        gm.remove(this);
     }
 }

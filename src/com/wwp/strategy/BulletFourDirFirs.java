@@ -16,9 +16,9 @@ public class BulletFourDirFirs implements BulletStrategy<Tank> {
     public void fir(Tank tank, GameModle tankFrame) {
         int bx = tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tankFrame.gameObjectArrayList.add(new Bullet(bx, by, Dir.UP, tank.getGroup(), tankFrame));
-        tankFrame.gameObjectArrayList.add(new Bullet(bx, by, Dir.DOWN, tank.getGroup(), tankFrame));
-        tankFrame.gameObjectArrayList.add(new Bullet(bx, by, Dir.LEFT, tank.getGroup(), tankFrame));
-        tankFrame.gameObjectArrayList.add(new Bullet(bx, by, Dir.RIGHT, tank.getGroup(), tankFrame));
+        tankFrame.add(new Bullet(bx, by, Dir.UP, tank.getGroup(), tankFrame));
+        tankFrame.add(new Bullet(bx, by, Dir.DOWN, tank.getGroup(), tankFrame));
+        tankFrame.add(new Bullet(bx, by, Dir.LEFT, tank.getGroup(), tankFrame));
+        tankFrame.add(new Bullet(bx, by, Dir.RIGHT, tank.getGroup(), tankFrame));
     }
 }

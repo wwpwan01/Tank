@@ -29,19 +29,19 @@ public class GameModle {
 
     ColliderChen colliderChen = new ColliderChen();
 
-    Collider collider = new TankTankCollider();
-    Collider collider2 = new BulletTankCollider();
+//    Collider collider = new TankTankCollider();
+//    Collider collider2 = new BulletTankCollider();
 
     public List<GameObject> gameObjectArrayList = new ArrayList<>();
 
     int GAME_WIDTH = 1600, GAME_HEIGHT = 900;
 
     public  void add(GameObject gameObject){
-        this.gameObjectArrayList.add(gameObject);
+        gameObjectArrayList.add(gameObject);
     }
 
     public  void remove(GameObject gameObject){
-        this.gameObjectArrayList.remove(gameObject);
+        gameObjectArrayList.remove(gameObject);
     }
 
     public GameModle(){
@@ -50,7 +50,7 @@ public class GameModle {
 
         //初始化敌方坦克
         for (int i = 0; i < initTankNum; i++){
-            this.add(new Tank(50+i*80,200,Dir.LEFT,Group.BED,this));
+            this.add(new Tank(50+i*80,200,Dir.DOWN,Group.BED,this));
         }
     }
 
@@ -71,9 +71,9 @@ public class GameModle {
             for (int j = i+1;j<gameObjectArrayList.size();j++){
                 GameObject gameObject = gameObjectArrayList.get(i);
                 GameObject gameObject2 = gameObjectArrayList.get(j);
-//                colliderChen.collde(gameObject,gameObject2);
-                collider.collide(gameObject,gameObject2);
-                collider2.collide(gameObject,gameObject2);
+                colliderChen.collide(gameObject,gameObject2);
+//                collider.collide(gameObject,gameObject2);
+//                collider2.collide(gameObject,gameObject2);
             }
         }
 

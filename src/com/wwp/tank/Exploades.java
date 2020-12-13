@@ -55,7 +55,7 @@ public class Exploades extends GameObject{
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.exploades[temp++],x,y,null);
         if(temp>=ResourceMgr.exploades.length){
-            gm.gameObjectArrayList.remove(this);
+            gm.remove(this);
         }
         System.out.println("die");
     }

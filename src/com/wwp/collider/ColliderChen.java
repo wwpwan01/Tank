@@ -13,7 +13,7 @@ import java.util.List;
  * @Description 责任链模式
  * @createTime 2020-12-10 21:50:00
  */
-public class ColliderChen {
+public class ColliderChen implements Collider{
 
     private List<Collider> colliders = new LinkedList<>();
 
@@ -27,9 +27,15 @@ public class ColliderChen {
         colliders.add(collider);
     }
 
-    public void collde(GameObject gameObject, GameObject gameObject2) {
+    @Override
+    public boolean collide(GameObject gameObject, GameObject gameObject2) {
+        // false  继续下一个责任链
+        // true  终止当前责任链
         for (int i = 0; i< colliders.size(); i++){
-            colliders.get(i).collide(gameObject,gameObject2);
+            if(!colliders.get(i).collide(gameObject,gameObject2)){
+                return false;
+            }
         }
+        return true;
     }
 }
